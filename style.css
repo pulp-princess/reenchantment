@@ -1,0 +1,152 @@
+
+
+h1 {
+    color: green;
+    font-family: "Bodoni Moda";
+ }
+
+ h2 {
+   font-family: "Bodoni Moda";
+   font-weight: 600;
+
+ }
+
+ #pagetitle {
+   display: flex;
+   justify-content: center;
+   font-size: larger;
+ }
+
+
+ h3 {
+   font-family: "Bodoni Moda";
+   font-weight: 300;
+   margin-bottom: 0;
+ }
+
+ p {
+   font-family: "Bodoni Moda";
+ }
+
+ #abouttext {
+   margin: 5% 5%;
+ }
+
+ ul li a{
+   font-family: "Bodoni Moda";
+   color: green;
+ }
+
+ a {
+   font-family: "Bodoni Moda";
+   color: green;
+ }
+
+#home h2 {
+   font-size: 5em;
+   font-family: "Bodoni Moda";
+}
+
+#nextreading {
+   text-align: center;
+}
+
+header {
+   text-align: center;
+   padding-top: 1em;
+}
+
+header h2 {
+   padding: 0;
+   margin: 0;
+}
+
+header h3 {
+   padding: 0;
+   margin: 0;
+}
+
+nav {
+   display: flex;
+   justify-content: center;
+   padding-top: 0.5em;
+   flex-wrap: wrap;
+}
+
+nav ul {
+   display: inline-flex;
+   justify-content: center;
+
+}
+
+ nav li {
+   padding: 1em 2em;
+   list-style-type: none;
+ }
+
+ a:hover {
+   color: deeppink;
+ }
+
+ #home {
+   display: flex;
+   margin: auto;
+   align-items: center;
+   text-align: center;
+   justify-content: center;
+   background-image: url(./images/bw1.jpg);
+   background-position: center;
+   color: white;
+   background-size: contain;
+   min-height: 30em;
+ }
+
+#home h2 {
+   font-weight: 600;
+}
+
+ #readinggallery {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-start;
+ }
+
+ #readinggallery img {
+   margin: 0.5em;
+   width: 20em;
+ }
+
+ #recintro {
+   display: flex;
+   padding: 1em;
+ }
+
+ #recintro img {
+   max-height: 20em;
+   padding: 1em;
+ }
+
+ #recintro p {
+   padding: 1em;
+ }
+
+ #thisweek {
+   padding: 2em;
+   justify-content: center;
+   display: flex;
+ }
+
+footer {
+   padding:0px;
+   margin-top: 10px;
+   text-align: center;
+   font-size: smaller;
+   bottom: 0;
+   z-index: 0;
+}
+
+footer a {
+   color: green;
+}
+
+
