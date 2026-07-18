@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+    <script type="text/javascript">
+// <![CDATA[
+var colour="#ff00f0";
+var sparkles=120;
+
+/****************************
+*  Tinkerbell Magic Sparkle *
+* (c) 2005 mf2fm web-design *
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (x!=ox || y!=oy) {
+    ox=x;
+    oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      starx[i]+=(i%5-2)/5;
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
+  else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tinyx[i]+=(i%5-2)/5;
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  set_scroll();
+  y=(e)?e.pageY:event.y+sdown;
+  x=(e)?e.pageX:event.x+sleft;
+}
+
+function set_scroll() {
+  if (typeof(self.pageYOffset)=="number") {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body.scrollTop || document.body.scrollLeft) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+	sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  if (typeof(self.innerWidth)=="number") {
+    swide=self.innerWidth;
+    shigh=self.innerHeight;
+  }
+  else if (document.documentElement && document.documentElement.clientWidth) {
+    swide=document.documentElement.clientWidth;
+    shigh=document.documentElement.clientHeight;
+  }
+  else if (document.body.clientWidth) {
+    swide=document.body.clientWidth;
+    shigh=document.body.clientHeight;
+  }
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  div.style.backgroundColor=colour;
+  return (div);
+}
+// ]]>
+</script>
+
+    <head>
+        <title>eEnchantment</title>
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+        <link href="../style.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <img src="../images/eenchantment-logo.gif" alt="e-Enchantment" height="150px">
+            <h2>The digital home of Re-Enchantment Literary Collective</h2>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="../index.html">home</a>
+                    </li>
+                    <li>
+                        <a href="../about.html">about</a>
+                    </li>
+                    <li>
+                        <a href="../contact.html">contact</a>
+                    </li>
+                    <li>
+                        <a href="../events.html">events</a>
+                    </li>
+                    <li>
+                        <a href="../recommendations.html">recommendations</a>
+                    </li>
+                    <li>
+                        <a href="../writing.html">written work</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+          <a href="../recommendations.html">back to recommendations</a>
+            <div id="pagetitle">
+                <h2>Emma's Recs</h2>
+            </div>
+            <div id="recintro">
+            <img src="../images/emmatranter.jpg">
+            <p>Emma Tranter is a writer, bookworker and aspiring surrealist based in London. 
+              She is a member of the Re-Enchantment organising committee and blogs about literature, fragrance and feminism at her substack, Heart Notes. </p>
+          </div>
+          <div id="recs">
+            <ol>
+              <li>
+                <h3><i>Digressions on Some Poems by Frank O'Hara</i> - Joe LeSueur</h3>
+                <p>A delicious, gossipy memoir by Frank O'Hara's friend, roommate and sometimes-lover. 
+                  It makes for such a strange, vivid portrait of mid-century gay life. It's crying out for a big rerelease to reach the younger readers for whom O'Hara's work has become so dear 
+                  (perhaps with a foreword from his <a href='https://the-rambling.com/2019/08/19/issue5-farr/'>nephew</a>, who is also writing about him...). 
+                  I also think it would make a lovely biopic, in the way the right frame can – like Peter Hujar's Day, or My Week with Marilyn. </p>
+              </li>
+              <li>
+                <h3><i>New Blue Sun</i> - André 3000</h3>
+                <p>I often listen to this album when I'm writing; I think it's so beautiful and strange. 
+                  I really admire André 3000 as an artist who has refused to meet his audience's expectations – 
+                  but beyond that artistic integrity, he seems to have an insatiable drive to create and always seems to be having fun while doing it. 
+                  Genuinely very inspiring! 
+                  His 2025 Met Gala look with the Piano on his back and accompanying surprise piano album drop was huge for me!</p>
+
+                </li>
+                 <li>
+                <h3><i>Belinda</i> - Maria Edgeworth</h3>
+                <p>Written by one of Jane Austen's influences – at the time, vastly more successful – Belinda is a much coarser take on the courtship novel. 
+                  It follows the eponymous heroine as she is sent to London to find a husband, where she stays as a guest of Lady Delacour, a libertine at odds with her perpetually drunk husband. 
+                  It is perhaps not as tightly plotted as Austen's work, which is to say there is a lot going on – gun duels in drag, 
+                  a troubling attempt to groom the perfect wife based on a real case, and an interracial marriage Edgeworth's father pushed her to write out of later editions 
+                  – but the pace makes it compelling and readable. 
+                  Be sure to read the 1801 edition!
+                </p>
+              </li>
+              <li>
+                <h3><i>The Herbs</i></h3>
+                <p>Move over, Paddington, this 1968 stop-motion children's TV show is Michael Bond's true masterpiece. 
+                  In a magic herb garden lives Parsley the Lion with his friends Dill the Dog, Lady Rosemary and Lord Basil, Bay-Leaf the Gardener, 
+                  and new herbs he encounters each episode. 
+                  Admittedly, this is a nostalgic watch for me, as I grew up on video tapes of old episodes, but this is a genuinely warm and charming piece of children's media 
+                  – weird and surprising and so beautifully crafted. 
+                  All the episodes are on youtube, and make a very comforting hangover watch. 
+                </p>
+              </li>
+              <li>
+                <h3><i>Exquisite Cadavers</i> - Meena Kandasamy</h3>
+                <p>Reading this shockingly underrated novel had me really questioning what is even the point of the Goldsmiths Prize, if a work like this is not on their radar. 
+                  Kandasamy uses glosses in the margins to provide an insight into the writing life, and the result is a sort of novel within a novel, a reflexive, exacting look at art, love and fascism. 
+                  There’s plenty to be said about autofictions and the space between writer and constructed tale, but I find myself thinking most about this book when reading for my Capital reading group, amused by the extent (& verve!) of Marx’s footnotes. 
+                  In this way, Kandasamy’s use of paratexts is both an experimental, artistic flair and an avenue for dialectical thinking and writing, one worth of the attention of any fellow Marxist writer!
+                </p>
+              </li>
+            </ol>
+          </div>
+        </main>
+         <footer>
+            <p>Contact: reenchantmentlitcollective@gmail.com</p>
+            <p><a href="https://www.instagram.com/reenchantmentldn/">instagram</a>  ✿  <a href="https://x.com/re__enchantment">twitter (or X, if you must)</a></p>
+            <p>Copyright: Re-Enchantment team member/amateur web designer Kate Bugos, 2026. We made this website from scratch because we didn't want to pay like £150 a year for Squarespace. This is both a budgetary necessity and an anarchist statement against platform capitalism. DIY or Die baby! :)</p>
+        </footer>
+    </body>
+</html>
